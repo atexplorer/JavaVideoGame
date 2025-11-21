@@ -1,6 +1,7 @@
 package com.ethan.RPG.service;
 
 import com.ethan.RPG.entity.Monster;
+import com.ethan.RPG.exceptions.MonsterNotFoundException;
 import com.ethan.RPG.repository.MonsterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,10 @@ public class MonsterServiceImpl implements MonsterService{
 
     @Override
     public Monster updateMonster(Monster monster, Long monsterId) {
-        Monster monsterDb = monsterRepository.findById(monsterId).orElseThrow(() -> new RuntimeException("No monster found with that Id"));
-
+        Monster monsterDb = monsterRepository.findById(monsterId).orElseThrow(() -> new MonsterNotFoundException("No monster found with that id"));
         monsterDb.setMonsterName(monster.getMonsterName());
         monsterDb.setMonsterType(monster.getMonsterType());
         monsterDb.setMonsterDescription(monster.getMonsterDescription());
-
         return monsterRepository.save(monsterDb);
     }
 

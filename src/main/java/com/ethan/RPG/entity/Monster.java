@@ -30,4 +30,9 @@ public class Monster {
         this.monsterType = monsterType;
     }
 
+    public Monster(String monsterName, String monsterDescription){
+        this.monsterName = monsterName;
+        this.monsterDescription = monsterDescription;
+    }
+
 }
