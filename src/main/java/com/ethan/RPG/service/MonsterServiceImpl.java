@@ -25,12 +25,28 @@ public class MonsterServiceImpl implements MonsterService{
     }
 
     @Override
+    public Monster fetchMonsterByName(String monsterName) {
+        return monsterRepository.findByMonsterName(monsterName).orElseThrow(() -> new MonsterNotFoundException("No monster found with name: " + monsterName));
+    }
+
+    @Override
     public Monster updateMonster(Monster monster, Long monsterId) {
         Monster monsterDb = monsterRepository.findById(monsterId).orElseThrow(() -> new MonsterNotFoundException("No monster found with that id"));
-        monsterDb.setMonsterName(monster.getMonsterName());
-        monsterDb.setMonsterType(monster.getMonsterType());
-        monsterDb.setMonsterDescription(monster.getMonsterDescription());
-        return monsterRepository.save(monsterDb);
+        transferMonsterData(monsterDb, monster);
+        return saveMonster(monsterDb);
+    }
+
+    @Override
+    public Monster updateMonster(Monster monster, String monsterName) {
+        Monster monsterDb = fetchMonsterByName(monster.getMonsterName());
+        transferMonsterData(monsterDb, monster);
+        return saveMonster(monsterDb);
+    }
+
+    private void transferMonsterData(Monster monsterDb, Monster monsterUpdate){
+        monsterDb.setMonsterName(monsterUpdate.getMonsterName());
+        monsterDb.setMonsterDescription(monsterUpdate.getMonsterDescription());
+        monsterDb.setMonsterType(monsterUpdate.getMonsterType());
     }
 
     @Override

@@ -47,6 +47,14 @@ public class MonsterRepositoryTest {
     }
 
     @Test
+    void givenCreatedMonster_whenFindByMonsterName_thenSuccess(){
+        Monster monster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        testEntityManager.persist(monster);
+        Optional<Monster> foundMonster = monsterRepository.findByMonsterName(monster.getMonsterName());
+        assertThat(foundMonster).contains(monster);
+    }
+
+    @Test
     void givenCreatedMonsters_whenFindAll_thenSuccess(){
         Monster monster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
         Monster monster2 = new Monster("The monster", "Creation of Dr. Frankenstein", "Monstrosity");
