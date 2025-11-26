@@ -10,8 +10,13 @@ public interface MonsterService {
 
     List<Monster> fetchMonsters();
 
+    Monster fetchMonsterByName(String monsterName);
+
     Monster updateMonster(Monster monster,
                           Long monsterId);
+
+    Monster updateMonster(Monster monster,
+                          String monsterName);
 
     String deleteMonsterById(Long monsterId);
 }

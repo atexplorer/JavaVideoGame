@@ -4,7 +4,6 @@ package com.ethan.RPG.controller;
 import com.ethan.RPG.entity.Monster;
 import com.ethan.RPG.service.MonsterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -26,10 +25,21 @@ public class MonsterController {
         return monsterService.fetchMonsters();
     }
 
+    @GetMapping("/monsters/{monsterName}")
+    public Monster getMonsterByName(@PathVariable("monsterName") String monsterName){
+        return monsterService.fetchMonsterByName(monsterName);
+    }
+
     @PutMapping("/monsters/{id}")
     public Monster updateMonster(@Valid @RequestBody Monster monster,
                                  @PathVariable("id") Long monsterId){
         return monsterService.updateMonster(monster, monsterId);
+    }
+
+    @PutMapping("/monsters/{monsterName}")
+    public Monster updateMonster(@Valid @RequestBody Monster monster,
+                                 @PathVariable("monsterName") String monsterName){
+        return monsterService.updateMonster(monster, monsterName);
     }
 
     @DeleteMapping("monsters/{id}")
