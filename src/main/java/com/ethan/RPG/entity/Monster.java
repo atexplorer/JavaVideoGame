@@ -23,6 +23,7 @@ public class Monster {
     private String monsterName;
     private String monsterDescription;
     private String monsterType;
+    private String meleeToHitMod;
 
     public Monster(String monsterName, String monsterDescription, String monsterType){
         this.monsterName = monsterName;

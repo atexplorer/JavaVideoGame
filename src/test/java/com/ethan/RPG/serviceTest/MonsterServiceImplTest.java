@@ -31,7 +31,7 @@ public class MonsterServiceImplTest {
 
     @Test
     public void saveMonsterTest(){
-        Monster monster = new Monster(1L, "Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        Monster monster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
 
         when(monsterRepository.save(monster)).thenReturn(monster);
 
@@ -82,7 +82,7 @@ public class MonsterServiceImplTest {
      */
     @Test
     public void testUpdateMonsterById_success(){
-        Monster savedMonster = new Monster(1L, "Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        Monster savedMonster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
         Monster updatedMonster = new Monster( "Igor", "Not so helpful assistant to Dr. Frankenstein", "Human");
 
         when(monsterRepository.findById(1L)).thenReturn(Optional.of(savedMonster));
@@ -97,7 +97,7 @@ public class MonsterServiceImplTest {
 
     @Test
     public void testUpdateMonsterById_throwsException(){
-        Monster updateMonster = new Monster(1L, "Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        Monster updateMonster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
         when(monsterRepository.findById(1L)).thenReturn(Optional.empty());
         MonsterNotFoundException exception = assertThrows(MonsterNotFoundException.class, () ->
                 monsterService.updateMonster(updateMonster, 1L));
@@ -108,7 +108,7 @@ public class MonsterServiceImplTest {
 
     @Test
     public void testUpdateMonsterByName(){
-        Monster savedMonster = new Monster(1L, "Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        Monster savedMonster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
         Monster updatedMonster = new Monster( "Igor", "Not so helpful assistant to Dr. Frankenstein", "Human");
 
         when(monsterRepository.findByMonsterName("Igor")).thenReturn(Optional.of(savedMonster));

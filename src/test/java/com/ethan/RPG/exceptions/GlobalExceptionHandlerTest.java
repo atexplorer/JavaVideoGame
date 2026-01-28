@@ -33,7 +33,7 @@ public class GlobalExceptionHandlerTest {
 
     @Test
     public void testHandleMonsterNotFoundException() throws Exception {
-        Monster monster = new Monster(1L, "Igor", "Helpful assistant to Dr. Frankenstein", "Human");
+        Monster monster = new Monster("Igor", "Helpful assistant to Dr. Frankenstein", "Human");
         String jsonRequest = objectMapper.writeValueAsString(monster);
 
         when(monsterService.updateMonster(any(), eq(1L)))
